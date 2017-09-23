@@ -40,7 +40,7 @@ public class TransTabHost extends TabHost implements DrawerLayoutImpl {
 
   public TransTabHost(Context context, AttributeSet attrs) {
     super(context, attrs);
-    translucentKit = new TranslucentKit(this, context);
+    translucentKit = new TranslucentKit(this, context, attrs);
   }
 
   @Override
@@ -50,7 +50,7 @@ public class TransTabHost extends TabHost implements DrawerLayoutImpl {
 
   @Override
   protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-    translucentKit.onMeasure();
+    translucentKit.onMeasureFrameLayout();
     super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 
     if (translucentKit.requiresAdjustMeasureHeight()) {

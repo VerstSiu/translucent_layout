@@ -20,8 +20,8 @@ package com.ijoic.translucent_layout;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.support.v4.app.FragmentTabHost;
 import android.util.AttributeSet;
-import android.widget.FrameLayout;
 
 /**
  * Translucent frame layout.
@@ -30,20 +30,16 @@ import android.widget.FrameLayout;
  * @date 2017/09/23 10:15
  * @version 1.0
  */
-public class TransFrameLayout extends FrameLayout implements DrawerLayoutImpl {
+public class TransFragmentTabHost extends FragmentTabHost implements DrawerLayoutImpl {
 
   private final TranslucentKit translucentKit;
 
-  public TransFrameLayout(Context context) {
+  public TransFragmentTabHost(Context context) {
     this(context, null);
   }
 
-  public TransFrameLayout(Context context, AttributeSet attrs) {
-    this(context, attrs, 0);
-  }
-
-  public TransFrameLayout(Context context, AttributeSet attrs, int defStyle) {
-    super(context, attrs, defStyle);
+  public TransFragmentTabHost(Context context, AttributeSet attrs) {
+    super(context, attrs);
     translucentKit = new TranslucentKit(this, context, attrs);
   }
 

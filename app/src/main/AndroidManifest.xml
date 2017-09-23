@@ -27,6 +27,9 @@
     <activity android:name=".cases.ScrollHeaderActivity"
       android:theme="@style/AppTheme.NoTitleBar.TransparentStatusBar"/>
 
+    <activity android:name=".cases.DrawerTabHostActivity"
+      android:theme="@style/AppTheme.NoTitleBar.TransparentStatusBar"/>
+
   </application>
 
 </manifest>

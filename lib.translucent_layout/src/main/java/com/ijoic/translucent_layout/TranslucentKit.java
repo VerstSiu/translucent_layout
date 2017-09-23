@@ -20,11 +20,14 @@ package com.ijoic.translucent_layout;
 
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.view.ViewCompat;
+import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -117,6 +120,7 @@ class TranslucentKit implements DrawerLayoutImpl {
 
   private final ViewGroup injectParent;
   private final boolean fitSystemEnabled;
+  private final boolean forceInset;
 
   private Drawable mStatusBarBackground;
 
@@ -132,13 +136,16 @@ class TranslucentKit implements DrawerLayoutImpl {
    * @param injectParent inject parent.
    * @param context context.
    */
-  TranslucentKit(@NonNull ViewGroup injectParent, @NonNull Context context) {
+  TranslucentKit(@NonNull ViewGroup injectParent, @NonNull Context context, @Nullable AttributeSet attrs) {
     this.injectParent = injectParent;
     fitSystemEnabled = ViewCompat.getFitsSystemWindows(injectParent);
 
     if (fitSystemEnabled) {
       IMPL.configureApplyInsets(injectParent);
       mStatusBarBackground = IMPL.getDefaultStatusBarBackground(context);
+      forceInset = readForceInset(context, attrs);
+    } else {
+      forceInset = false;
     }
   }
 
@@ -150,7 +157,7 @@ class TranslucentKit implements DrawerLayoutImpl {
     injectParent.requestLayout();
   }
 
-  void onMeasure() {
+  void onMeasureFrameLayout() {
     if (!fitSystemEnabled || mLastInsets == null) {
       return;
     }
@@ -169,11 +176,44 @@ class TranslucentKit implements DrawerLayoutImpl {
 
       final ViewGroup.MarginLayoutParams lp = (ViewGroup.MarginLayoutParams) child.getLayoutParams();
 
-      if (ViewCompat.getFitsSystemWindows(child)) {
-        IMPL.dispatchChildInsets(child, mLastInsets);
-      } else {
-        IMPL.applyMarginInsets(lp, mLastInsets);
+      injectWindowInsets(child, lp);
+    }
+  }
+
+  void onMeasureLinearLayout(boolean layoutVertical) {
+    if (!fitSystemEnabled || mLastInsets == null) {
+      return;
+    }
+    if (!exactParentHeightInit) {
+      exactParentHeightInit = true;
+      exactParentHeight = readParentHeight(injectParent, 0);
+    }
+
+    final int childCount = injectParent.getChildCount();
+    int visibleChildIndex = 0;
+
+    for (int i = 0; i < childCount; i++) {
+      final View child = injectParent.getChildAt(i);
+
+      if (child.getVisibility() == View.GONE) {
+        continue;
       }
+
+      final ViewGroup.MarginLayoutParams lp = (ViewGroup.MarginLayoutParams) child.getLayoutParams();
+
+      if (!layoutVertical || visibleChildIndex == 0) {
+        injectWindowInsets(child, lp);
+      }
+
+      ++visibleChildIndex;
+    }
+  }
+
+  private void injectWindowInsets(@NonNull View child, @Nullable ViewGroup.MarginLayoutParams lp) {
+    if (ViewCompat.getFitsSystemWindows(child)) {
+      IMPL.dispatchChildInsets(child, mLastInsets);
+    } else {
+      IMPL.applyMarginInsets(lp, mLastInsets);
     }
   }
 
@@ -181,7 +221,9 @@ class TranslucentKit implements DrawerLayoutImpl {
    * Returns <code>true</code> adjust measure height is needed.
    */
   boolean requiresAdjustMeasureHeight() {
-    return exactParentHeight > 0 && injectParent.getMeasuredHeight() <= exactParentHeight;
+    return fitSystemEnabled && (
+        forceInset || (exactParentHeight > 0 && injectParent.getMeasuredHeight() <= exactParentHeight)
+    );
   }
 
   /**
@@ -214,5 +256,18 @@ class TranslucentKit implements DrawerLayoutImpl {
       return defValue;
     }
     return layoutHeight;
+  }
+
+  private static boolean readForceInset(@NonNull Context context, AttributeSet attrs) {
+    boolean forceInset = false;
+
+    TypedArray a = context.obtainStyledAttributes(attrs, new int[] {
+      R.attr.force_inset
+    });
+
+    forceInset = a.getBoolean(0, forceInset);
+
+    a.recycle();
+    return forceInset;
   }
 }

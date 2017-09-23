@@ -39,12 +39,13 @@ public class TransLinearLayout extends LinearLayout implements DrawerLayoutImpl 
   }
 
   public TransLinearLayout(Context context, AttributeSet attrs) {
-    this(context, attrs, 0);
+    super(context, attrs);
+    translucentKit = new TranslucentKit(this, context, attrs);
   }
 
   public TransLinearLayout(Context context, AttributeSet attrs, int defStyle) {
     super(context, attrs, defStyle);
-    translucentKit = new TranslucentKit(this, context);
+    translucentKit = new TranslucentKit(this, context, attrs);
   }
 
   @Override
@@ -54,7 +55,7 @@ public class TransLinearLayout extends LinearLayout implements DrawerLayoutImpl 
 
   @Override
   protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-    translucentKit.onMeasure();
+    translucentKit.onMeasureLinearLayout(getOrientation() == VERTICAL);
     super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 
     if (translucentKit.requiresAdjustMeasureHeight()) {

@@ -24,6 +24,7 @@ import android.os.Bundle;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import sample.ijoic.translucent_layout.cases.DrawerTabHostActivity;
 import sample.ijoic.translucent_layout.cases.FullPageActivity;
 import sample.ijoic.translucent_layout.cases.ScrollHeaderActivity;
 import sample.ijoic.translucent_layout.cases.SimpleTitleActivity;
@@ -50,6 +51,11 @@ public class MainActivity extends AppCompatActivity {
   @OnClick(R.id.button_scroll_header)
   public void displayHeaderBlockSample() {
     startActivity(new Intent(this, ScrollHeaderActivity.class));
+  }
+
+  @OnClick(R.id.button_drawer_tabhost)
+  public void displayDrawerTabHost() {
+    startActivity(new Intent(this, DrawerTabHostActivity.class));
   }
 
   @Override

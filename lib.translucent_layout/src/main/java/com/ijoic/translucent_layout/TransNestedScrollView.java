@@ -44,7 +44,7 @@ public class TransNestedScrollView extends NestedScrollView implements DrawerLay
 
   public TransNestedScrollView(Context context, AttributeSet attrs, int defStyle) {
     super(context, attrs, defStyle);
-    translucentKit = new TranslucentKit(this, context);
+    translucentKit = new TranslucentKit(this, context, attrs);
   }
 
   @Override
@@ -54,7 +54,7 @@ public class TransNestedScrollView extends NestedScrollView implements DrawerLay
 
   @Override
   protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-    translucentKit.onMeasure();
+    translucentKit.onMeasureFrameLayout();
     super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 
     if (translucentKit.requiresAdjustMeasureHeight()) {

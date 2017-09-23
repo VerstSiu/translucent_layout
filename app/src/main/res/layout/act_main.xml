@@ -24,4 +24,10 @@
     android:layout_height="wrap_content"
     android:text="@string/title_sample_scroll_header"/>
 
+  <Button
+    android:id="@+id/button_drawer_tabhost"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="@string/title_sample_drawer_tabhost"/>
+
 </LinearLayout>
