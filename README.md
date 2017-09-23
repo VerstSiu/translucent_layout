@@ -7,9 +7,9 @@ Translucent status bar effect for common layout without change activity theme.
 
 ## Preview
 
-<img alt="main" src="screen_shots/main.png" width="135"/>
-<img alt="main" src="screen_shots/full_page.jpg" width="135"/>
-<img alt="main" src="screen_shots/simple_title.png" width="135"/>
+<img alt="main" src="screen_shots/main.png" width="135"/>&nbsp;
+<img alt="main" src="screen_shots/full_page.jpg" width="135"/>&nbsp;
+<img alt="main" src="screen_shots/simple_title.png" width="135"/>&nbsp;
 <img alt="main" src="screen_shots/scroll_header.jpg" width="135"/>
 
 ## Download
@@ -81,12 +81,10 @@ Translucent status bar effect for common layout without change activity theme.
     ```xml
 
     <com.ijoic.translucent_layout.TransLinearLayout
-      xmlns:android=".."
-      ..
+      xmlns:android="http://schemas.android.com/apk/res/android"
       android:fitsSystemWindow="true">
     
       <com.ijoic.translucent_layout.TransLinearLayout
-        ..
         android:fitsSystemWindow="true">
     
       </com.ijoic.translucent_layout.TransLinearLayout>
