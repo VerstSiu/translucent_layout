@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.ijoic.translucent_layout.TransFrameLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:orientation="vertical"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:fitsSystemWindows="true"
+  android:background="@android:color/white">
+
+  <!-- hack for use custom page title. -->
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/theme_title_color"
+    android:fitsSystemWindows="true">
+
+    <RelativeLayout
+      android:orientation="horizontal"
+      android:layout_width="match_parent"
+      android:layout_height="@dimen/theme_title_height"
+      android:background="@color/theme_title_color">
+
+      <include layout="@layout/title_back_button"/>
+
+      <TextView
+        style="@style/AppTheme.TitleText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="@string/title_sample_simple_title"/>
+    </RelativeLayout>
+  </LinearLayout>
+
+  <View
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"/>
+
+</com.ijoic.translucent_layout.TransFrameLayout>

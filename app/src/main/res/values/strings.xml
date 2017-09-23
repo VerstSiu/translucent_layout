@@ -1,0 +1,11 @@
+<resources>
+
+  <string name="app_name">Translucent Layout</string>
+
+  <string name="title_sample_full_page">Full Page</string>
+  <string name="title_sample_simple_title">Simple Title</string>
+  <string name="title_sample_scroll_header">Scroll Header</string>
+
+  <string name="alt_button_back">Back</string>
+
+</resources>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:orientation="vertical"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:padding="12dp">
+
+  <Button
+    android:id="@+id/button_full_page"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="@string/title_sample_full_page"/>
+
+  <Button
+    android:id="@+id/button_simple_title"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="@string/title_sample_simple_title"/>
+
+  <Button
+    android:id="@+id/button_scroll_header"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="@string/title_sample_scroll_header"/>
+
+</LinearLayout>
