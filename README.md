@@ -7,10 +7,10 @@ Translucent status bar effect for common layout without change activity theme.
 
 ## Preview
 
-<img alt="main" src="screen_shots/main.png" width="135"/>&nbsp;
+<img alt="main" src="screen_shots/main.jpg" width="135"/>&nbsp;
 <img alt="main" src="screen_shots/full_page.jpg" width="135"/>&nbsp;
 <img alt="main" src="screen_shots/simple_title.png" width="135"/>&nbsp;
-<img alt="main" src="screen_shots/scroll_header.jpg" width="135"/>
+<img alt="main" src="screen_shots/drawer_tabhost.jpg" width="135"/>
 
 ## Download
 
@@ -32,7 +32,8 @@ Translucent status bar effect for common layout without change activity theme.
     ```gradle
 
     dependencies {
-      compile 'com.github.VerstSiu.translucent_layout:lib.translucent_layout:1.1'
+      compile 'com.github.VerstSiu.translucent_layout:lib.translucent_layout:1.0'
+      compile 'com.github.VerstSiu:lib.translucent_layout:1.0'
     }
 
     ```
