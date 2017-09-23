@@ -76,7 +76,7 @@ Translucent status bar effect for common layout without change activity theme.
 
     ```
 
-2. Replace parent layout with "TransXXX`.
+2. Replace parent layout with `TransXXX`.
     
     ```xml
 
