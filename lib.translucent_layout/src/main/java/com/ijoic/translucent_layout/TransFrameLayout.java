@@ -23,6 +23,9 @@ import android.graphics.Canvas;
 import android.util.AttributeSet;
 import android.widget.FrameLayout;
 
+import com.ijoic.translucent_layout.core.DrawerLayoutImpl;
+import com.ijoic.translucent_layout.core.TranslucentKit;
+
 /**
  * Translucent frame layout.
  *

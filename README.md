@@ -32,7 +32,7 @@ Translucent status bar effect for common layout without change activity theme.
     ```gradle
 
     dependencies {
-      compile 'com.github.VerstSiu.translucent_layout:lib.translucent_layout:1.0'
+      compile 'com.github.VerstSiu.translucent_layout:lib.translucent_layout:1.1'
     }
 
     ```

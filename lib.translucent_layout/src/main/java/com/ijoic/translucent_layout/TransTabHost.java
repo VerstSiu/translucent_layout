@@ -23,8 +23,11 @@ import android.graphics.Canvas;
 import android.util.AttributeSet;
 import android.widget.TabHost;
 
+import com.ijoic.translucent_layout.core.DrawerLayoutImpl;
+import com.ijoic.translucent_layout.core.TranslucentKit;
+
 /**
- * Translucent frame layout.
+ * Translucent tab host.
  *
  * @author VerstSiu verstsiu@126.com
  * @date 2017/09/23 15:57

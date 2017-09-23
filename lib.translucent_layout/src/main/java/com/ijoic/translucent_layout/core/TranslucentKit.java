@@ -16,7 +16,7 @@
  *
  */
 
-package com.ijoic.translucent_layout;
+package com.ijoic.translucent_layout.core;
 
 import android.annotation.TargetApi;
 import android.content.Context;
@@ -31,6 +31,8 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.ijoic.translucent_layout.R;
+
 /**
  * Translucent kit.
  *
@@ -38,9 +40,12 @@ import android.view.ViewGroup;
  * @date 2017/9/22 22:53
  * @version 1.0
  */
-class TranslucentKit implements DrawerLayoutImpl {
+public class TranslucentKit implements DrawerLayoutImpl {
 
-  interface DrawerLayoutCompatImpl {
+  /**
+   * Drawer layout compat impl.
+   */
+  private interface DrawerLayoutCompatImpl {
     void configureApplyInsets(View drawerLayout);
     void dispatchChildInsets(View child, Object insets);
     void applyMarginInsets(ViewGroup.MarginLayoutParams lp, Object insets);
@@ -48,6 +53,9 @@ class TranslucentKit implements DrawerLayoutImpl {
     Drawable getDefaultStatusBarBackground(Context context);
   }
 
+  /**
+   * Drawer layout compat impl base.
+   */
   private static class DrawerLayoutCompatImplBase implements DrawerLayoutCompatImpl {
     @Override
     public void configureApplyInsets(View drawerLayout) {
@@ -75,6 +83,10 @@ class TranslucentKit implements DrawerLayoutImpl {
     }
   }
 
+
+  /**
+   * Drawer layout compat impl API 21.
+   */
   private static class DrawerLayoutCompatImplApi21 implements DrawerLayoutCompatImpl {
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -136,7 +148,7 @@ class TranslucentKit implements DrawerLayoutImpl {
    * @param injectParent inject parent.
    * @param context context.
    */
-  TranslucentKit(@NonNull ViewGroup injectParent, @NonNull Context context, @Nullable AttributeSet attrs) {
+  public TranslucentKit(@NonNull ViewGroup injectParent, @NonNull Context context, @Nullable AttributeSet attrs) {
     this.injectParent = injectParent;
     fitSystemEnabled = ViewCompat.getFitsSystemWindows(injectParent);
 
@@ -157,7 +169,10 @@ class TranslucentKit implements DrawerLayoutImpl {
     injectParent.requestLayout();
   }
 
-  void onMeasureFrameLayout() {
+  /**
+   * Measure parent view as pure view group.
+   */
+  public void onMeasurePureViewGroup() {
     if (!fitSystemEnabled || mLastInsets == null) {
       return;
     }
@@ -180,7 +195,38 @@ class TranslucentKit implements DrawerLayoutImpl {
     }
   }
 
-  void onMeasureLinearLayout(boolean layoutVertical) {
+  /**
+   * Measure parent view as frame layout.
+   */
+  public void onMeasureFrameLayout() {
+    if (!fitSystemEnabled || mLastInsets == null) {
+      return;
+    }
+    if (!exactParentHeightInit) {
+      exactParentHeightInit = true;
+      exactParentHeight = readParentHeight(injectParent, 0);
+    }
+
+    final int childCount = injectParent.getChildCount();
+    for (int i = 0; i < childCount; i++) {
+      final View child = injectParent.getChildAt(i);
+
+      if (child.getVisibility() == View.GONE) {
+        continue;
+      }
+
+      if (ViewCompat.getFitsSystemWindows(child)) {
+        IMPL.dispatchChildInsets(child, mLastInsets);
+      }
+    }
+  }
+
+  /**
+   * Measure parent view as linear layout.
+   *
+   * @param layoutVertical layout vertical status.
+   */
+  public void onMeasureLinearLayout(boolean layoutVertical) {
     if (!fitSystemEnabled || mLastInsets == null) {
       return;
     }
@@ -220,7 +266,7 @@ class TranslucentKit implements DrawerLayoutImpl {
   /**
    * Returns <code>true</code> adjust measure height is needed.
    */
-  boolean requiresAdjustMeasureHeight() {
+  public boolean requiresAdjustMeasureHeight() {
     return fitSystemEnabled && (
         forceInset || (exactParentHeight > 0 && injectParent.getMeasuredHeight() <= exactParentHeight)
     );
@@ -229,11 +275,16 @@ class TranslucentKit implements DrawerLayoutImpl {
   /**
    * Returns top inset.
    */
-  int getTopInset() {
+  public int getTopInset() {
     return IMPL.getTopInset(mLastInsets);
   }
 
-  void onDraw(Canvas c) {
+  /**
+   * Draw insets.
+   *
+   * @param c canvas.
+   */
+  public void onDraw(Canvas c) {
 //    if (mDrawStatusBarBackground && mStatusBarBackground != null) {
 //      final int inset = IMPL.getTopInset(mLastInsets);
 //      if (inset > 0) {

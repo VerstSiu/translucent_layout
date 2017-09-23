@@ -1,4 +1,4 @@
-package com.ijoic.translucent_layout;
+package com.ijoic.translucent_layout.core;
 
 /*
  * Copyright (C) 2014 The Android Open Source Project

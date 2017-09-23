@@ -20,29 +20,33 @@ package com.ijoic.translucent_layout;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.support.v4.widget.NestedScrollView;
 import android.util.AttributeSet;
+import android.widget.FrameLayout;
+import android.widget.HorizontalScrollView;
+
+import com.ijoic.translucent_layout.core.DrawerLayoutImpl;
+import com.ijoic.translucent_layout.core.TranslucentKit;
 
 /**
- * Translucent nested scroll layout.
+ * Translucent horizontal scroll view.
  *
  * @author VerstSiu verstsiu@126.com
- * @date 2017/09/23 10:15
+ * @date 2017/09/23 19:49
  * @version 1.0
  */
-public class TransNestedScrollView extends NestedScrollView implements DrawerLayoutImpl {
+public class TransHorizontalScrollView extends HorizontalScrollView implements DrawerLayoutImpl {
 
   private final TranslucentKit translucentKit;
 
-  public TransNestedScrollView(Context context) {
+  public TransHorizontalScrollView(Context context) {
     this(context, null);
   }
 
-  public TransNestedScrollView(Context context, AttributeSet attrs) {
+  public TransHorizontalScrollView(Context context, AttributeSet attrs) {
     this(context, attrs, 0);
   }
 
-  public TransNestedScrollView(Context context, AttributeSet attrs, int defStyle) {
+  public TransHorizontalScrollView(Context context, AttributeSet attrs, int defStyle) {
     super(context, attrs, defStyle);
     translucentKit = new TranslucentKit(this, context, attrs);
   }

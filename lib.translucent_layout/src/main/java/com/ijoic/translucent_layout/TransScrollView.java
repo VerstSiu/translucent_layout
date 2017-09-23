@@ -20,26 +20,33 @@ package com.ijoic.translucent_layout;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.support.v4.app.FragmentTabHost;
 import android.util.AttributeSet;
+import android.widget.ScrollView;
+
+import com.ijoic.translucent_layout.core.DrawerLayoutImpl;
+import com.ijoic.translucent_layout.core.TranslucentKit;
 
 /**
- * Translucent frame layout.
+ * Translucent scroll view.
  *
  * @author VerstSiu verstsiu@126.com
- * @date 2017/09/23 10:15
+ * @date 2017/09/23 19:49
  * @version 1.0
  */
-public class TransFragmentTabHost extends FragmentTabHost implements DrawerLayoutImpl {
+public class TransScrollView extends ScrollView implements DrawerLayoutImpl {
 
   private final TranslucentKit translucentKit;
 
-  public TransFragmentTabHost(Context context) {
+  public TransScrollView(Context context) {
     this(context, null);
   }
 
-  public TransFragmentTabHost(Context context, AttributeSet attrs) {
-    super(context, attrs);
+  public TransScrollView(Context context, AttributeSet attrs) {
+    this(context, attrs, 0);
+  }
+
+  public TransScrollView(Context context, AttributeSet attrs, int defStyle) {
+    super(context, attrs, defStyle);
     translucentKit = new TranslucentKit(this, context, attrs);
   }
 

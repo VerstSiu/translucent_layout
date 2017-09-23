@@ -16,38 +16,33 @@
  *
  */
 
-package com.ijoic.translucent_layout;
+package com.ijoic.translucent_layout.v4;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.AttributeSet;
-import android.widget.LinearLayout;
 
 import com.ijoic.translucent_layout.core.DrawerLayoutImpl;
 import com.ijoic.translucent_layout.core.TranslucentKit;
 
 /**
- * Translucent linear layout.
+ * Translucent swipe refresh layout.
  *
  * @author VerstSiu verstsiu@126.com
- * @date 2017/09/23 10:15
- * @version 1.0
+ * @date 2017/09/23 18:51
+ * @version 1.0.1
  */
-public class TransLinearLayout extends LinearLayout implements DrawerLayoutImpl {
+public class TransSwipeRefreshLayout extends SwipeRefreshLayout implements DrawerLayoutImpl {
 
   private final TranslucentKit translucentKit;
 
-  public TransLinearLayout(Context context) {
+  public TransSwipeRefreshLayout(Context context) {
     this(context, null);
   }
 
-  public TransLinearLayout(Context context, AttributeSet attrs) {
+  public TransSwipeRefreshLayout(Context context, AttributeSet attrs) {
     super(context, attrs);
-    translucentKit = new TranslucentKit(this, context, attrs);
-  }
-
-  public TransLinearLayout(Context context, AttributeSet attrs, int defStyle) {
-    super(context, attrs, defStyle);
     translucentKit = new TranslucentKit(this, context, attrs);
   }
 
@@ -57,8 +52,8 @@ public class TransLinearLayout extends LinearLayout implements DrawerLayoutImpl 
   }
 
   @Override
-  protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-    translucentKit.onMeasureLinearLayout(getOrientation() == VERTICAL);
+  public void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+    translucentKit.onMeasureFrameLayout();
     super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 
     if (translucentKit.requiresAdjustMeasureHeight()) {

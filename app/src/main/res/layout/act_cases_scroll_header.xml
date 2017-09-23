@@ -6,7 +6,7 @@
   android:layout_height="match_parent"
   android:fitsSystemWindows="true">
 
-  <com.ijoic.translucent_layout.TransNestedScrollView
+  <com.ijoic.translucent_layout.v4.TransNestedScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
@@ -35,7 +35,7 @@
         android:layout_width="match_parent"
         android:layout_height="800dp"/>
     </com.ijoic.translucent_layout.TransLinearLayout>
-  </com.ijoic.translucent_layout.TransNestedScrollView>
+  </com.ijoic.translucent_layout.v4.TransNestedScrollView>
 
   <View
     android:layout_width="wrap_content"
