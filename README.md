@@ -32,8 +32,7 @@ Translucent status bar effect for common layout without change activity theme.
     ```gradle
 
     dependencies {
-      compile 'com.github.VerstSiu.translucent_layout:lib.translucent_layout:1.0'
-      compile 'com.github.VerstSiu:lib.translucent_layout:1.0'
+      compile 'com.github.VerstSiu:lib.translucent_layout:1.1'
     }
 
     ```
@@ -59,7 +58,7 @@ Translucent status bar effect for common layout without change activity theme.
     
     ```xml
 
-    <style name="AppTheme.NoActionBar" parent="AppCompat.Theme.Light.NoActionBar"/>
+    <style name="AppTheme.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar"/>
 
 
     <style name="AppTheme.NoActionBar.StatusBarTransparent">
@@ -95,6 +94,32 @@ Translucent status bar effect for common layout without change activity theme.
     </com.ijoic.translucent_layout.TransLinearLayout>
 
     ```
+
+## Wrap Parent
+
+Use extra layout to dispatch background translucent in those case:
+
+1. Current view group or child, use vertical align related layout attributes.
+
+2. `RelativeLayout`.
+
+```xml
+
+<com.ijoic.translucent_layout.TransLinearLayout
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:orientation="vertical"
+  android:background="..">
+
+  <RelativeLayout>
+
+  ..
+
+  </RelativeLayout>
+
+</com.ijoic.translucent_layout.TransLinearLayout>
+
+```
 
 ## Adjust Resize
 

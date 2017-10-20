@@ -20,7 +20,6 @@ package com.ijoic.translucent_layout;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 import android.widget.LinearLayout;
 
@@ -65,23 +64,6 @@ public class TransLinearLayout extends LinearLayout implements DrawerLayoutImpl 
 
     if (translucentKit.requiresAdjustMeasureHeight()) {
       super.setMeasuredDimension(getMeasuredWidth(), translucentKit.adjustMeasuredHeight(getMeasuredHeight()));
-    }
-  }
-
-  @NonNull
-  private String mode2text(int mode) {
-    switch (mode) {
-      case MeasureSpec.AT_MOST:
-        return "AT_MOST";
-
-      case MeasureSpec.UNSPECIFIED:
-        return "UNSPECIFIED";
-
-      case MeasureSpec.EXACTLY:
-        return "EXACTLY";
-
-      default:
-        return "NONE";
     }
   }
 
