@@ -96,6 +96,23 @@ Translucent status bar effect for common layout without change activity theme.
 
     ```
 
+## Adjust Resize
+
+Use `adjustResize` at the root layout when your activity's `windowSoftInputMode` settings with `adjustResize`.
+
+```xml
+
+<com.ijoic.translucent_layout.TransLinearLayout
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:fitsSystemWindows="true"
+  app:adjustResize="true">
+
+  ..
+
+</com.ijoic.translucent_layout.TransLinearLayout>
+
+```
+
 ## License
 
 ```

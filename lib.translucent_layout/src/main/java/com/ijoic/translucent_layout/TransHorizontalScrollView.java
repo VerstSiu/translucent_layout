@@ -21,7 +21,6 @@ package com.ijoic.translucent_layout;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.util.AttributeSet;
-import android.widget.FrameLayout;
 import android.widget.HorizontalScrollView;
 
 import com.ijoic.translucent_layout.core.DrawerLayoutImpl;
@@ -58,11 +57,12 @@ public class TransHorizontalScrollView extends HorizontalScrollView implements D
 
   @Override
   protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+    heightMeasureSpec = translucentKit.adjustHeightSpec(heightMeasureSpec);
     translucentKit.onMeasureFrameLayout();
     super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 
     if (translucentKit.requiresAdjustMeasureHeight()) {
-      super.setMeasuredDimension(getMeasuredWidth(), getMeasuredHeight() + translucentKit.getTopInset());
+      super.setMeasuredDimension(getMeasuredWidth(), translucentKit.adjustMeasuredHeight(getMeasuredHeight()));
     }
   }
 

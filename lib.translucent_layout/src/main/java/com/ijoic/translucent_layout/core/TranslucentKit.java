@@ -50,6 +50,7 @@ public class TranslucentKit implements DrawerLayoutImpl {
     void dispatchChildInsets(View child, Object insets);
     void applyMarginInsets(ViewGroup.MarginLayoutParams lp, Object insets);
     int getTopInset(Object lastInsets);
+    int getBottomInset(Object lastInsets);
     Drawable getDefaultStatusBarBackground(Context context);
   }
 
@@ -74,6 +75,11 @@ public class TranslucentKit implements DrawerLayoutImpl {
 
     @Override
     public int getTopInset(Object insets) {
+      return 0;
+    }
+
+    @Override
+    public int getBottomInset(Object lastInsets) {
       return 0;
     }
 
@@ -114,6 +120,12 @@ public class TranslucentKit implements DrawerLayoutImpl {
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
+    public int getBottomInset(Object insets) {
+      return DrawerLayoutCompatApi21.getBottomInset(insets);
+    }
+
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    @Override
     public Drawable getDefaultStatusBarBackground(Context context) {
       return DrawerLayoutCompatApi21.getDefaultStatusBarBackground(context);
     }
@@ -133,6 +145,7 @@ public class TranslucentKit implements DrawerLayoutImpl {
   private final ViewGroup injectParent;
   private final boolean fitSystemEnabled;
   private final boolean forceInset;
+  private final boolean adjustResize;
 
   private Drawable mStatusBarBackground;
 
@@ -145,6 +158,9 @@ public class TranslucentKit implements DrawerLayoutImpl {
   /**
    * Constructor.
    *
+   * <p>Use forceInset to force mark fit windows.</p>
+   * <p>Use adjustResize at root layout to fit keyboard window resize.</p>
+   *
    * @param injectParent inject parent.
    * @param context context.
    */
@@ -155,9 +171,18 @@ public class TranslucentKit implements DrawerLayoutImpl {
     if (fitSystemEnabled) {
       IMPL.configureApplyInsets(injectParent);
       mStatusBarBackground = IMPL.getDefaultStatusBarBackground(context);
-      forceInset = readForceInset(context, attrs);
+
+      // Init attrs.
+      TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.TranslucentLayout);
+
+      forceInset = a.getBoolean(R.styleable.TranslucentLayout_forceInset, false);
+      adjustResize = a.getBoolean(R.styleable.TranslucentLayout_adjustResize, false);
+
+      a.recycle();
+
     } else {
       forceInset = false;
+      adjustResize = false;
     }
   }
 
@@ -273,10 +298,31 @@ public class TranslucentKit implements DrawerLayoutImpl {
   }
 
   /**
-   * Returns top inset.
+   * Returns adjusted height spec.
+   *
+   * <p>Clip window bottom insets height for adjust resize mode.</p>
+   *
+   * @param heightSpec height spec.
    */
-  public int getTopInset() {
-    return IMPL.getTopInset(mLastInsets);
+  public int adjustHeightSpec(int heightSpec) {
+    int extraBottom;
+
+    if (fitSystemEnabled && adjustResize && (extraBottom = IMPL.getBottomInset(mLastInsets)) > 0) {
+      heightSpec = View.MeasureSpec.makeMeasureSpec(
+          Math.max(View.MeasureSpec.getSize(heightSpec) - extraBottom, 0),
+          View.MeasureSpec.getMode(heightSpec)
+      );
+    }
+    return heightSpec;
+  }
+
+  /**
+   * Returns adjusted measured height.
+   *
+   * @param measuredHeight measured height.
+   */
+  public int adjustMeasuredHeight(int measuredHeight) {
+    return measuredHeight + IMPL.getTopInset(mLastInsets);
   }
 
   /**
@@ -286,7 +332,7 @@ public class TranslucentKit implements DrawerLayoutImpl {
    */
   public void onDraw(Canvas c) {
 //    if (mDrawStatusBarBackground && mStatusBarBackground != null) {
-//      final int inset = IMPL.getTopInset(mLastInsets);
+//      final int inset = IMPL.getExtraInset(mLastInsets);
 //      if (inset > 0) {
 //        mStatusBarBackground.setBounds(0, 0, getWidth(), inset);
 //        mStatusBarBackground.draw(c);
@@ -309,16 +355,4 @@ public class TranslucentKit implements DrawerLayoutImpl {
     return layoutHeight;
   }
 
-  private static boolean readForceInset(@NonNull Context context, AttributeSet attrs) {
-    boolean forceInset = false;
-
-    TypedArray a = context.obtainStyledAttributes(attrs, new int[] {
-      R.attr.force_inset
-    });
-
-    forceInset = a.getBoolean(0, forceInset);
-
-    a.recycle();
-    return forceInset;
-  }
 }

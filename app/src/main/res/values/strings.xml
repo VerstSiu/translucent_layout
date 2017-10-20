@@ -6,6 +6,7 @@
   <string name="title_sample_simple_title">Simple Title</string>
   <string name="title_sample_scroll_header">Scroll Header</string>
   <string name="title_sample_drawer_tabhost">Drawer TabHost</string>
+  <string name="title_sample_simple_title_edit">Simple Title Edit</string>
 
   <string name="alt_button_back">Back</string>
 

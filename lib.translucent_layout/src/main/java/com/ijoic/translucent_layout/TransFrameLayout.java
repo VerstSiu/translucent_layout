@@ -57,11 +57,12 @@ public class TransFrameLayout extends FrameLayout implements DrawerLayoutImpl {
 
   @Override
   protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+    heightMeasureSpec = translucentKit.adjustHeightSpec(heightMeasureSpec);
     translucentKit.onMeasureFrameLayout();
     super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 
     if (translucentKit.requiresAdjustMeasureHeight()) {
-      super.setMeasuredDimension(getMeasuredWidth(), getMeasuredHeight() + translucentKit.getTopInset());
+      super.setMeasuredDimension(getMeasuredWidth(), translucentKit.adjustMeasuredHeight(getMeasuredHeight()));
     }
   }
 

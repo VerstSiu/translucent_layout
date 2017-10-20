@@ -28,6 +28,7 @@ import sample.ijoic.translucent_layout.cases.DrawerTabHostActivity;
 import sample.ijoic.translucent_layout.cases.FullPageActivity;
 import sample.ijoic.translucent_layout.cases.ScrollHeaderActivity;
 import sample.ijoic.translucent_layout.cases.SimpleTitleActivity;
+import sample.ijoic.translucent_layout.cases.SimpleTitleEditActivity;
 
 /**
  * Main activity.
@@ -56,6 +57,11 @@ public class MainActivity extends AppCompatActivity {
   @OnClick(R.id.button_drawer_tabhost)
   public void displayDrawerTabHost() {
     startActivity(new Intent(this, DrawerTabHostActivity.class));
+  }
+
+  @OnClick(R.id.button_simple_title_edit)
+  public void onCaseSimpleTitleEdit() {
+    startActivity(new Intent(this, SimpleTitleEditActivity.class));
   }
 
   @Override

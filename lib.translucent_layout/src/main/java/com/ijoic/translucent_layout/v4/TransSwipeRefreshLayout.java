@@ -53,11 +53,12 @@ public class TransSwipeRefreshLayout extends SwipeRefreshLayout implements Drawe
 
   @Override
   public void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+    heightMeasureSpec = translucentKit.adjustHeightSpec(heightMeasureSpec);
     translucentKit.onMeasureFrameLayout();
     super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 
     if (translucentKit.requiresAdjustMeasureHeight()) {
-      super.setMeasuredDimension(getMeasuredWidth(), getMeasuredHeight() + translucentKit.getTopInset());
+      super.setMeasuredDimension(getMeasuredWidth(), translucentKit.adjustMeasuredHeight(getMeasuredHeight()));
     }
   }
 

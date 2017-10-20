@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.ijoic.translucent_layout.TransLinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:orientation="vertical"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:fitsSystemWindows="true"
+  android:background="@android:color/white"
+  app:adjustResize="true">
+
+  <!-- hack for use custom page title. -->
+  <com.ijoic.translucent_layout.TransLinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/theme_title_color"
+    android:fitsSystemWindows="true"
+    android:tag="title">
+
+    <RelativeLayout
+      android:orientation="horizontal"
+      android:layout_width="match_parent"
+      android:layout_height="@dimen/theme_title_height">
+
+      <include layout="@layout/title_back_button"/>
+
+      <TextView
+        style="@style/AppTheme.TitleText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="@string/title_sample_simple_title"/>
+    </RelativeLayout>
+  </com.ijoic.translucent_layout.TransLinearLayout>
+
+  <View
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="1"/>
+
+  <EditText
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:inputType="text"/>
+
+</com.ijoic.translucent_layout.TransLinearLayout>

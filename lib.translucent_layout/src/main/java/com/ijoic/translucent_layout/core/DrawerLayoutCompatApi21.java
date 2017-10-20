@@ -20,6 +20,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.RequiresApi;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowInsets;
@@ -37,6 +38,7 @@ class DrawerLayoutCompatApi21 {
   public static void configureApplyInsets(View drawerLayout) {
     if (drawerLayout instanceof DrawerLayoutImpl) {
       drawerLayout.setOnApplyWindowInsetsListener(new DrawerLayoutCompatApi21.InsetsListener());
+//      drawerLayout.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
       drawerLayout.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE
           | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
     }
@@ -52,11 +54,16 @@ class DrawerLayoutCompatApi21 {
     lp.leftMargin = wi.getSystemWindowInsetLeft();
     lp.topMargin = wi.getSystemWindowInsetTop();
     lp.rightMargin = wi.getSystemWindowInsetRight();
-    lp.bottomMargin = wi.getSystemWindowInsetBottom();
+    lp.bottomMargin = 0;
+    Log.e("ts_layout", "apply margin insets: {" + lp.leftMargin + "," + lp.topMargin + "," + lp.rightMargin + "," + lp.bottomMargin + "}");
   }
 
   public static int getTopInset(Object insets) {
     return insets != null ? ((WindowInsets) insets).getSystemWindowInsetTop() : 0;
+  }
+
+  public static int getBottomInset(Object insets) {
+    return insets != null ? ((WindowInsets) insets).getSystemWindowInsetBottom() : 0;
   }
 
   public static Drawable getDefaultStatusBarBackground(Context context) {

@@ -26,13 +26,13 @@ import butterknife.OnClick;
 import sample.ijoic.translucent_layout.R;
 
 /**
- * Simple title activity.
+ * Simple title edit activity.
  *
  * @author VerstSiu verstsiu@126.com
- * @date 2017/09/22 11:35
+ * @date 2017/10/19 20:07
  * @version 1.0
  */
-public class SimpleTitleActivity extends AppCompatActivity {
+public class SimpleTitleEditActivity extends AppCompatActivity {
 
   @OnClick(R.id.button_back)
   public void closePage() {
@@ -42,7 +42,7 @@ public class SimpleTitleActivity extends AppCompatActivity {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.act_cases_simple_title);
+    setContentView(R.layout.act_cases_simple_title_edit);
     ButterKnife.bind(this);
   }
 }
